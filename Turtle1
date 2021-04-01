@@ -1,0 +1,26 @@
+import turtle
+
+flag = turtle.Turtle()
+
+flag.speed(3)
+flag.pensize(5)
+flag.color('black')
+##Japan Flag
+def draw(x, y):
+    flag.penup()
+    flag.goto(x,y)
+    flag.pendown()
+draw(-350,280)
+flag.forward(700)
+flag.right(90)
+flag.forward(560)
+flag.right(90)
+flag.forward(700)
+flag.right(90)
+flag.forward(560)
+draw(80,0)
+flag.color('red')
+flag.begin_fill()
+flag.circle(80,360)
+flag.end_fill()
+turtle.done()
