@@ -5,7 +5,6 @@ flag = turtle.Turtle()
 flag.speed(3)
 flag.pensize(5)
 flag.color('black')
-##Japan Flag
 def draw(x, y):
     flag.penup()
     flag.goto(x,y)
