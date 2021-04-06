@@ -1,0 +1,274 @@
+import turtle
+import winsound
+
+wn = turtle.Screen()
+wn.title("Pong")
+wn.bgcolor("black")
+wn.setup(width=1100, height=600)
+wn.tracer(0)
+
+
+def get_teams():
+    teams = 0
+    while True:
+        teams = input("TEAMS YOU WANT(1 or 2): ")
+        if teams.isdigit():
+            teams = int(teams)
+        else:
+            print("INPUT Isn't Numeric...Try Again")
+            continue
+        if 1 <= teams <= 2:
+            return teams
+        else:
+            print("You Should Choose Between 1 && 2")
+
+
+Team = get_teams()
+pll = 0
+plr = 0
+
+# Goal1
+Goal = turtle.Turtle()
+Goal.speed(0)
+Goal.color("blue")
+Goal.penup()
+Goal.hideturtle()
+Goal.goto(-450, 0)
+Goal.write("GOALPOST", align="center", font=("Courier", 24, "normal"))
+
+# Goal2
+Goal1 = turtle.Turtle()
+Goal1.speed(0)
+Goal1.color("blue")
+Goal1.penup()
+Goal1.hideturtle()
+Goal1.goto(450, 0)
+Goal1.write("GOALPOST", align="center", font=("Courier", 24, "normal"))
+
+# Mark1
+Mark1 = turtle.Turtle()
+Mark1.speed(0)
+Mark1.shape("square")
+Mark1.color("white")
+Mark1.shapesize(stretch_wid=1, stretch_len=55)
+Mark1.penup()
+Mark1.goto(0, 300)
+# Mark2
+Mark2 = turtle.Turtle()
+Mark2.speed(0)
+Mark2.shape("square")
+Mark2.color("white")
+Mark2.shapesize(stretch_wid=1, stretch_len=55)
+Mark2.penup()
+Mark2.goto(0, -295)
+# MarkRightUp
+MarkRightUp = turtle.Turtle()
+MarkRightUp.speed(0)
+MarkRightUp.shape("square")
+MarkRightUp.color("white")
+MarkRightUp.shapesize(stretch_wid=10, stretch_len=1)
+MarkRightUp.penup()
+MarkRightUp.goto(540, 250)
+# MarkRightDown
+MarkRightDown = turtle.Turtle()
+MarkRightDown.speed(0)
+MarkRightDown.shape("square")
+MarkRightDown.color("white")
+MarkRightDown.shapesize(stretch_wid=10, stretch_len=1)
+MarkRightDown.penup()
+MarkRightDown.goto(540, -250)
+# MarkLeftUp
+MarkLeftUp = turtle.Turtle()
+MarkLeftUp.speed(0)
+MarkLeftUp.shape("square")
+MarkLeftUp.color("white")
+MarkLeftUp.shapesize(stretch_wid=10, stretch_len=1)
+MarkLeftUp.penup()
+MarkLeftUp.goto(-545, 250)
+# MarkLeftDown
+MarkLeftDown = turtle.Turtle()
+MarkLeftDown.speed(0)
+MarkLeftDown.shape("square")
+MarkLeftDown.color("white")
+MarkLeftDown.shapesize(stretch_wid=10, stretch_len=1)
+MarkLeftDown.penup()
+MarkLeftDown.goto(-545, -250)
+# pen Tab
+Writer = turtle.Turtle()
+Writer.speed(0)
+Writer.color("blue")
+Writer.penup()
+Writer.hideturtle()
+Writer.goto(0, 250)
+Writer.write("PLAYER LEFT: 0  |:|  PLAYER RIGHT: 0", align="center", font=("Courier", 24, "normal"))
+# paddleA
+
+
+paddle_a = turtle.Turtle()
+paddle_a.speed(0)
+paddle_a.shape("square")
+paddle_a.color("green")
+paddle_a.shapesize(stretch_wid=5, stretch_len=1)
+paddle_a.penup()
+paddle_a.goto(-450, 0)
+
+paddle_a1 = turtle.Turtle()
+paddle_a1.speed(0)
+paddle_a1.shape("square")
+paddle_a1.color("green")
+paddle_a1.shapesize(stretch_wid=5, stretch_len=1)
+paddle_a1.penup()
+paddle_a1.goto(-250, 0)
+# paddleB
+
+
+paddle_b = turtle.Turtle()
+paddle_b.speed(0)
+paddle_b.shape("square")
+paddle_b.color("red")
+paddle_b.shapesize(stretch_wid=5, stretch_len=1)
+paddle_b.penup()
+paddle_b.goto(450, 0)
+
+paddle_b1 = turtle.Turtle()
+paddle_b1.speed(0)
+paddle_b1.shape("square")
+paddle_b1.color("red")
+paddle_b1.shapesize(stretch_wid=5, stretch_len=1)
+paddle_b1.penup()
+paddle_b1.goto(250, 0)
+# Ball
+
+
+ball = turtle.Turtle()
+ball.speed(0)
+ball.shape("square")
+ball.color("white")
+ball.penup()
+ball.goto(0, 0)
+ball.dx = 1
+ball.dy = 1
+
+
+def paddle_a_up():
+    y = paddle_a.ycor()
+    y += 20
+    paddle_a.sety(y)
+
+
+def paddle_a_down():
+    y = paddle_a.ycor()
+    y -= 20
+    paddle_a.sety(y)
+
+
+def paddle_a1_up():
+    y = paddle_a1.ycor()
+    y += 20
+    paddle_a1.sety(y)
+
+
+def paddle_a1_down():
+    y = paddle_a1.ycor()
+    y -= 20
+    paddle_a1.sety(y)
+
+
+def paddle_b_up():
+    y = paddle_b.ycor()
+    y += 20
+    paddle_b.sety(y)
+
+
+def paddle_b_down():
+    y = paddle_b.ycor()
+    y -= 20
+    paddle_b.sety(y)
+
+
+def paddle_b1_up():
+    y = paddle_b1.ycor()
+    y += 20
+    paddle_b1.sety(y)
+
+
+def paddle_b1_down():
+    y = paddle_b1.ycor()
+    y -= 20
+    paddle_b1.sety(y)
+
+
+# listen
+wn.listen()
+wn.onkeypress(paddle_a_up, "w")
+wn.onkeypress(paddle_a_down, "s")
+wn.onkeypress(paddle_a1_up, "e")
+wn.onkeypress(paddle_a1_down, "d")
+wn.onkeypress(paddle_b_up, "p")
+wn.onkeypress(paddle_b_down, "l")
+wn.onkeypress(paddle_b1_up, "o")
+wn.onkeypress(paddle_b1_down, "k")
+while True:
+    wn.update()
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
+    if ball.ycor() > 290:
+        ball.sety(290)
+        ball.dy *= -1
+        winsound.PlaySound("Ping.wav", winsound.SND_ASYNC)
+    if ball.ycor() < -290:
+        ball.sety(-290)
+        ball.dy *= -1
+        winsound.PlaySound("Ping.wav", winsound.SND_ASYNC)
+    if ball.xcor() > 540:
+        if 150 > ball.ycor() > -150:
+            ball.goto(0, 0)
+            pll = pll + 1
+            ball.dx *= -1
+            Writer.clear()
+            Writer.write("PLAYER LEFT: {}  |:|  PLAYER RIGHT: {}".format(pll, plr), align="center",
+                         font=("Courier", 24, "normal"))
+        else:
+            ball.dx *= -1
+    if ball.xcor() < -545:
+        if 150 > ball.ycor() > -150:
+            ball.goto(0, 0)
+            plr = plr + 1
+            ball.dx *= -1
+            Writer.clear()
+            Writer.write("PLAYER LEFT: {}  |:|  PLAYER RIGHT: {}".format(pll, plr), align="center",
+                         font=("Courier", 24, "normal"))
+        else:
+            ball.dx *= -1
+    if (440 < ball.xcor() < 450) and (paddle_b.ycor() + 80 > ball.ycor() > paddle_b.ycor() - 80):
+        ball.setx(440)
+        ball.dx *= -1
+        winsound.PlaySound("Ping.wav", winsound.SND_ASYNC)
+
+    if (-440 > ball.xcor() > -450) and (paddle_a.ycor() + 80 > ball.ycor() > paddle_a.ycor() - 80):
+        ball.setx(-440)
+        ball.dx *= -1
+        winsound.PlaySound("Ping.wav", winsound.SND_ASYNC)
+    if (240 < ball.xcor() < 250) and (paddle_b1.ycor() + 80 > ball.ycor() > paddle_b1.ycor() - 80):
+        ball.setx(240)
+        ball.dx *= -1
+        winsound.PlaySound("Ping.wav", winsound.SND_ASYNC)
+
+    if (-240 > ball.xcor() > -250) and (paddle_a1.ycor() + 80 > ball.ycor() > paddle_a1.ycor() - 80):
+        ball.setx(-240)
+        ball.dx *= -1
+        winsound.PlaySound("Ping.wav", winsound.SND_ASYNC)
+
+    if Team == 1:
+        if 250 < ball.xcor() < 450:
+            if paddle_b.ycor() < ball.ycor() and abs(paddle_b.ycor() - ball.ycor()) > 10:
+                paddle_b_up()
+
+            elif paddle_b.ycor() > ball.ycor() and abs(paddle_b.ycor() - ball.ycor()) > 10:
+                paddle_b_down()
+        else:
+            if paddle_b1.ycor() < ball.ycor() and abs(paddle_b1.ycor() - ball.ycor()) > 10:
+                paddle_b1_up()
+
+            elif paddle_b1.ycor() > ball.ycor() and abs(paddle_b1.ycor() - ball.ycor()) > 10:
+                paddle_b1_down()
